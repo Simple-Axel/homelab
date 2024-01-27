@@ -82,7 +82,8 @@ reverse_proxy:
   - domain_name: upload.ei.tech.eus
     scheme: http
     host: 100.75.123.40 # Margaret Tailscale
-    port: 80
+    port: 8809
+    
   - domain_name: nginxproxymanager.ei.tech.eus
     scheme: http
     host: 127.0.0.1 # Localhost (Nginx Proxy Manager)
