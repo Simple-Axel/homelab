@@ -204,8 +204,8 @@ services:
   filebrowser:
     volumes:
           - /mnt/storage:/mnt/storage
-          - /mnt/storage/AppData/filebrowser/filebrowser.db:/database/filebrowser.db
-          - /mnt/storage/AppData/filebrowser/settings.json:/config/settings.json
+          - /mnt/storage/AppData/filebrowser/db:/database
+          - /mnt/storage/AppData/filebrowser/settings:/config
     environment:
           - PUID=1000
           - PGID=1000
