@@ -308,7 +308,7 @@ services:
     stop_grace_period: 2m
     volumes:
       - type: bind
-        source: /mnt/storage/AppData/PhotoStructure # < CHANGE THIS LINE
+        source: /home/naiel/AppData/PhotoStructure # < CHANGE THIS LINE
         target: /ps/library
 
       # Example additional directories to import into your library:
