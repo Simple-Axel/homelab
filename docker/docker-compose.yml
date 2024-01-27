@@ -204,7 +204,7 @@ services:
   filebrowser:
     volumes:
           - /mnt/storage:/mnt/storage
-          - mnt/storage/AppData/filebrowser/filebrowser.db:/database/filebrowser.db
+          - /mnt/storage/AppData/filebrowser/filebrowser.db:/database/filebrowser.db
           - /mnt/storage/AppData/filebrowser/settings.json:/config/settings.json
     environment:
           - PUID=1000
