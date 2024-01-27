@@ -275,18 +275,6 @@ services:
       - "1887:1880"
     volumes:
       - /mnt/storage/AppData/node-red/data:/data
-  budge:
-    image: lscr.io/linuxserver/budge:latest
-    container_name: budge
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Madrid
-    volumes:
-      - /mnt/storage/AppData/budge/config:/config
-    ports:
-      - 8083:80
-    restart: unless-stopped
   wikijs:
     image: lscr.io/linuxserver/wikijs:latest
     container_name: wikijs
