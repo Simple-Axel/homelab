@@ -300,3 +300,26 @@ services:
     ports:
       - 8084:3000
     restart: unless-stopped
+  photostructure:
+    # You can run alpha, beta, or stable builds. See
+    # <https://forum.photostructure.com/t/274> for details.
+    image: photostructure/server:alpha
+    restart: unless-stopped
+    stop_grace_period: 2m
+    volumes:
+      - type: bind
+        source: /mnt/storage/AppData/PhotoStructure # < CHANGE THIS LINE
+        target: /ps/library
+
+      # Example additional directories to import into your library:
+      - type: bind
+        source: "/mnt/storage/Datos Familia/Fotos-Web" # < CHANGE THIS LINE
+        target: /dfphotos
+
+    ports:
+      - 1787:1787/tcp
+
+    environment:
+      - "TZ=Europe/Madrid" # < CHANGE THIS LINE
+      - "PUID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -u`
+      - "PGID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -g`
