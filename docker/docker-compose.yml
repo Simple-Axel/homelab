@@ -311,3 +311,13 @@ services:
       - "TZ=Europe/Madrid" # < CHANGE THIS LINE
       - "PUID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -u`
       - "PGID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -g`
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: rei3
+      POSTGRES_PASSWORD: yippeecalciumjinglingchatting
+      POSTGRES_DB: rei3
