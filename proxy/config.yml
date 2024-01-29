@@ -83,6 +83,10 @@ reverse_proxy:
     scheme: http
     host: 100.75.123.40 # Margaret Tailscale
     port: 8809
+  - domain_name: sc.infra.simpleaxel.com
+    scheme: http
+    host: 100.75.123.40 # Margaret Tailscale
+    port: 8085
     
   - domain_name: nginxproxymanager.ei.tech.eus
     scheme: http
