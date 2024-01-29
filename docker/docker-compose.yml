@@ -11,6 +11,7 @@ services:
       - /mnt/storage/AppData/homeassistant/config:/config
       - /mnt/storage/Media:/media
       - /etc/localtime:/etc/localtime:ro
+      - /home/naiel/AppData/homeassistant-db:/dastabasefolder
     restart: unless-stopped
     privileged: true
     network_mode: host
