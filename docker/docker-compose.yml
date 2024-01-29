@@ -324,3 +324,15 @@ services:
       POSTGRES_DB: rei3
     volumes:
       - /home/naiel/AppData/Rei3-DB:/var/lib/postgresql/data
+  saltcorn:
+    stdin_open: true
+    tty: true
+    volumes:
+        - /home/naiel/AppData/saltcorn:/db
+    environment:
+        - SQLITE_FILEPATH=/db/db.sqlite
+        - SALTCORN_SESSION_SECRET=s3cr3t
+    ports:
+        - 8085:3000
+    image: saltcorn/saltcorn:latest
+    command: serve
