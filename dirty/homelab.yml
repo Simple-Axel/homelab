@@ -1,0 +1,62 @@
+version: '3.3'
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:2024.1.6 # There is a bug in newer versions becaouse of a bump in AwesomeVersion
+    ports:
+     - 8123:8123
+    volumes:
+     - /srv/mergerfs/Margaret/AppData/homeassistant/config:/config
+     - /etc/localtime:/etc/localtime:ro
+     - /home/pi/AppData/homeassistant-db:/dastabasefolder
+    network_mode: "host"
+  nodered:
+    image: nodered/node-red:3.1.5-18
+    user: root
+    environment:
+      TZ: Europe/Madrid
+    ports:
+     - 1886:1880
+    volumes:
+     - /srv/mergerfs/Margaret/AppData/node-red/data:/data
+  wyoming-whisper:
+    ports:
+      - 10300:10300
+    image: rhasspy/wyoming-whisper:1.0.0
+    command: --model tiny-int8 --language es
+  wyoming-piper:
+    ports:
+      - 10200:10200
+    image: rhasspy/wyoming-piper:1.4.0
+    command: --voice es_ES-sharvard-medium
+  wyoming-openwakeword:
+    ports:
+      - 10400:10400
+    image: rhasspy/wyoming-openwakeword:1.9.0
+    command: --preload-model 'alexa'
+  httpd:
+    image: httpd:2.4
+    ports:
+     - 8888:80
+    volumes:
+     - /srv/mergerfs/Margaret/Compartido/hass:/usr/local/apache2/htdocs/
+  photostructure:
+    image: photostructure/server:2023.12.0-alpha.7
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    ports:
+     - 1787:1787
+    volumes:
+     - /srv/mergerfs/Margaret/Datos Familia/Fotos-Web:/ps/library
+     - /srv/mergerfs/Margaret/Datos Familia/Fotos:/dfphotos
+  grav:
+    image: lscr.io/linuxserver/grav:latest
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    ports:
+     - 8001:80
+    volumes:
+     - /srv/mergerfs/Margaret/ClusterAppData/grav01:/config

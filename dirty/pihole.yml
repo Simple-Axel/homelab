@@ -1,0 +1,15 @@
+version: "3"
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2024.01.0
+    network_mode: "host"
+    environment:
+      TZ: 'Europe/Madrid'
+      WEB_PORT: 81
+    volumes:
+      - '/srv/mergerfs/Margaret/AppData/pihole/etc-pihole:/etc/pihole'
+      - '/srv/mergerfs/Margaret/AppData/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
