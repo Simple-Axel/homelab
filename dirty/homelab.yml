@@ -45,6 +45,7 @@ services:
       PGID: '1000'
       PUID: '1000'
       TZ: Europe/Madrid
+      PS_CPU_BUSY_PERCENT: 200%
     ports:
      - 1787:1787
     volumes:
