@@ -48,7 +48,7 @@ services:
     ports:
      - 1787:1787
     volumes:
-     - /srv/mergerfs/Margaret/Datos Familia/Fotos-Web:/ps/library
+     - /home/pi/AppData/photostructure-lib:/ps/library
      - /srv/mergerfs/Margaret/Datos Familia/Fotos:/dfphotos
   grav:
     image: lscr.io/linuxserver/grav:latest
