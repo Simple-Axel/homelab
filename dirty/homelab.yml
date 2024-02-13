@@ -39,6 +39,12 @@ services:
      - 8888:80
     volumes:
      - /srv/mergerfs/Margaret/Compartido/hass:/usr/local/apache2/htdocs/
+  httpd-teletext:
+    image: httpd:2.4
+    ports:
+     - 8889:80
+    volumes:
+     - /srv/mergerfs/Margaret/Compartido/hass/Teletext:/usr/local/apache2/htdocs/
   photostructure:
     image: photostructure/server:2023.12.0-alpha.7
     environment:
