@@ -45,18 +45,18 @@ services:
      - 8889:80
     volumes:
      - /srv/mergerfs/Margaret/Compartido/hass/Teletext:/usr/local/apache2/htdocs/
-  photostructure:
-    image: photostructure/server:2023.12.0-alpha.7
-    environment:
-      PGID: '1000'
-      PUID: '1000'
-      TZ: Europe/Madrid
-      PS_CPU_BUSY_PERCENT: 200%
-    ports:
-     - 1787:1787
-    volumes:
-     - /home/pi/AppData/photostructure-lib:/ps/library
-     - /srv/mergerfs/Margaret/Datos Familia/Fotos:/dfphotos
+  #photostructure:
+  #  image: photostructure/server:2023.12.0-alpha.7
+  #  environment:
+  #    PGID: '1000'
+  #    PUID: '1000'
+  #    TZ: Europe/Madrid
+  #    PS_CPU_BUSY_PERCENT: 200%
+  #  ports:
+  #   - 1787:1787
+  #  volumes:
+  #   - /home/pi/AppData/photostructure-lib:/ps/library
+  #   - /srv/mergerfs/Margaret/Datos Familia/Fotos:/dfphotos
   grav:
     image: lscr.io/linuxserver/grav:latest
     environment:
