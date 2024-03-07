@@ -26,7 +26,7 @@ services:
   wyoming-piper:
     ports:
       - 10200:10200
-    image: rhasspy/wyoming-piper:1.4.0
+    image: rhasspy/wyoming-piper:1.5.0
     command: --voice es_ES-sharvard-medium
   wyoming-openwakeword:
     ports:
