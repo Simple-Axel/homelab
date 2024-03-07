@@ -10,7 +10,7 @@ services:
      - /home/pi/AppData/homeassistant-db:/dastabasefolder
     network_mode: "host"
   nodered:
-    image: nodered/node-red:3.1.5-18
+    image: nodered/node-red:3.1.6-18
     user: root
     environment:
       TZ: Europe/Madrid
