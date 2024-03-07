@@ -7,9 +7,22 @@ services:
     environment:
       TZ: 'Europe/Madrid'
       WEB_PORT: 81
+      INTERFACE: "bond0"
     volumes:
       - '/srv/mergerfs/Margaret/AppData/pihole/etc-pihole:/etc/pihole'
       - '/srv/mergerfs/Margaret/AppData/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
+    restart: unless-stopped
+  dokuwiki:
+    image: lscr.io/linuxserver/dokuwiki:latest
+    container_name: dokuwiki
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - /srv/mergerfs/Margaret/AppData/dokuwiki2/config:/config
+    ports:
+      - 83:80
     restart: unless-stopped

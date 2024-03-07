@@ -1,0 +1,9 @@
+version: "3"
+services:
+  owncast:
+    volumes:
+      - /home/pi/AppData/owncast/data:/app/data
+    ports:
+      - 8083:8080
+      - 1935:1935
+    image: owncast/owncast:latest
