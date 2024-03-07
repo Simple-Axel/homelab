@@ -31,7 +31,7 @@ services:
   wyoming-openwakeword:
     ports:
       - 10400:10400
-    image: rhasspy/wyoming-openwakeword:1.9.0
+    image: rhasspy/wyoming-openwakeword:1.10.0
     command: --preload-model 'alexa'
   metube:
     image: ghcr.io/alexta69/metube
