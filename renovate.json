@@ -5,5 +5,12 @@
   ],
   "docker-compose": {
     "fileMatch": ["\\.yml$"]
-  }
+  },
+  "reviewers": ["naielv"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
