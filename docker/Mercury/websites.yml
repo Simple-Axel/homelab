@@ -1,0 +1,34 @@
+version: '3'
+services:
+  recetas:
+    image: lscr.io/linuxserver/grav:latest
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    ports:
+     - 8007:80
+    volumes:
+     - /mnt/samba/AppData/LCARS/Recetas:/config
+  lcars:
+    image: httpd:2.4
+    ports:
+     - 8988:80
+    volumes:
+     - /mnt/samba/Compartido/hass/LCARS_AXEL:/usr/local/apache2/htdocs/
+  httpd:
+    image: httpd:2.4
+    ports:
+     - 8888:80
+    volumes:
+     - /mnt/samba/Compartido/hass:/usr/local/apache2/htdocs/
+  techeus:
+    image: lscr.io/linuxserver/grav:latest
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    ports:
+     - 8001:80
+    volumes:
+     - /mnt/samba/ClusterAppData/grav01:/config
