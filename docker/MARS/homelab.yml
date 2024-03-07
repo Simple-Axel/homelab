@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:2024.1.6 # There is a bug in newer versions becaouse of a bump in AwesomeVersion
+    image: ghcr.io/home-assistant/home-assistant:2024.3.0 # There is a bug in newer versions becaouse of a bump in AwesomeVersion
     ports:
      - 8123:8123
     volumes:
