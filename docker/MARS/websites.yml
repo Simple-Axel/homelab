@@ -7,3 +7,15 @@ services:
       - 8083:8080
       - 1935:1935
     image: owncast/owncast:latest
+  dokuwiki:
+    image: lscr.io/linuxserver/dokuwiki:latest
+    container_name: dokuwiki
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - /srv/mergerfs/Margaret/AppData/dokuwiki2/config:/config
+    ports:
+      - 83:80
+    restart: unless-stopped
