@@ -32,3 +32,9 @@ services:
      - 8001:80
     volumes:
      - /mnt/samba/ClusterAppData/grav01:/config
+  pclabnaiel:
+    image: httpd:2.4
+    ports:
+     - 8288:80
+    volumes:
+     - /srv/mergerfs/Margaret/Compartido/Sitios Web/PC Lab Naiel:/usr/local/apache2/htdocs/
