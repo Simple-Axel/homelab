@@ -37,4 +37,4 @@ services:
     ports:
      - 8288:80
     volumes:
-     - /srv/mergerfs/Margaret/Compartido/Sitios Web/PC Lab Naiel:/usr/local/apache2/htdocs/
+     - /mnt/samba/Compartido/Sitios Web/PC Lab Naiel:/usr/local/apache2/htdocs/
