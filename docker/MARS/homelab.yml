@@ -21,7 +21,7 @@ services:
   wyoming-whisper:
     ports:
       - 10300:10300
-    image: rhasspy/wyoming-whisper:1.0.0
+    image: rhasspy/wyoming-whisper:2.1.0
     command: --model tiny-int8 --language es
   wyoming-piper:
     ports:
