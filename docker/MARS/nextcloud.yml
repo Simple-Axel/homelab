@@ -23,7 +23,6 @@ services:
       - db
     volumes:
       - /srv/mergerfs/Margaret/AppData/nextcloud4:/var/www/html
-      - /srv/mergerfs/Margaret:/margaretstorage
     environment:
       - MYSQL_PASSWORD=decalelitismskillethatchet
       - MYSQL_DATABASE=nextcloud
