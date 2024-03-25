@@ -1,0 +1,81 @@
+version: '3'
+services:
+  gatus:
+    image: twinproduction/gatus:latest
+    restart: always
+    ports:
+      - "8100:8080"
+    volumes:
+      - /mnt/samba/AppData/GATUS:/config
+  gatus_public:
+    image: twinproduction/gatus:latest
+    restart: always
+    volumes:
+      - /mnt/samba/AppData/GATUS_PUBLIC:/config
+    ports:
+      - "8101:8080"
+
+  go2rtc:
+    image: alexxit/go2rtc
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - "/mnt/go2rtc:/config"
+    ports:
+     - 8102:1984
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Venus
+  recetas:
+    image: lscr.io/linuxserver/grav:latest
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    volumes:
+     - /mnt/samba/AppData/LCARS/Recetas2:/config
+    ports:
+      - "8103:80"
+  httpd:
+    image: httpd:2.4
+    volumes:
+     - /mnt/samba/AppData/DavTech:/usr/local/apache2/htdocs/
+    deploy:
+      replicas: 3
+    ports:
+      - "8104:80"
+  techeus_old:
+    image: lscr.io/linuxserver/grav:latest
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: Europe/Madrid
+    volumes:
+     - /mnt/samba/ClusterAppData/grav01:/config
+    ports:
+      - "8105:80"
+
+  app:
+    restart: always
+    image: ghcr.io/simple-axel/app:main
+    env_file: stack.env
+    ports:
+      - "8106:17170"
+    deploy:
+      replicas: 6
+
+  dizquetv:
+    image: jasongdove/dizquetv:develop-arm64
+    restart: unless-stopped
+    ports:
+      - "8107:8000"
+    volumes:
+      - /mnt/samba/AppData/dizquetv-volume:/home/node/app/.dizquetv
+    deploy:
+      placement:
+        constraints:
+          - node.hostname != Venus

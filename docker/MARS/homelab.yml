@@ -9,15 +9,6 @@ services:
      - /etc/localtime:/etc/localtime:ro
      - /home/pi/AppData/homeassistant-db:/dastabasefolder
     network_mode: "host"
-  nodered:
-    image: nodered/node-red:3.1.6-18
-    user: root
-    environment:
-      TZ: Europe/Madrid
-    ports:
-     - 1886:1880
-    volumes:
-     - /srv/mergerfs/Margaret/AppData/node-red/data:/data
   metube:
     image: ghcr.io/alexta69/metube
     restart: unless-stopped

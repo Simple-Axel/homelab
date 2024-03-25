@@ -1,0 +1,81 @@
+version: '3'
+services:
+  sonarr:
+    image: ghcr.io/hotio/sonarr
+    ports:
+      - "8111:8989"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Europe/Madrid
+    volumes:
+      - /mnt/local/AppData/supertorrents_sonarr:/config
+      - /mnt/samba/Media/SuperTorrents:/data
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Mercury
+  radarr:
+    image: ghcr.io/hotio/radarr
+    ports:
+      - "8112:7878"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Europe/Madrid
+    volumes:
+      - /mnt/local/AppData/supertorrents_radarr:/config
+      - /mnt/samba/Media/SuperTorrents:/data
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Venus
+  jellyseerr:
+    image: ghcr.io/hotio/jellyseerr
+    ports:
+      - "8110:5055"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Europe/Madrid
+    volumes:
+      - /mnt/local/AppData/supertorrents_jellyseer:/config
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Venus
+  jackett:
+    image: ghcr.io/hotio/jackett
+    ports:
+      - "8113:9117"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Europe/Madrid
+    volumes:
+      - /mnt/local/AppData/supertorrents_jackett:/config
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Venus
+  qbittorrent:
+    image: ghcr.io/hotio/qbittorrent
+    ports:
+      - "8114:8080"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - TZ=Europe/Madrid
+      - WEBUI_PORTS=8080/tcp
+    volumes:
+      - /mnt/local/AppData/supertorrents_qbittorrent:/config
+      - /mnt/samba/Media/SuperTorrents:/data
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == Phobos
