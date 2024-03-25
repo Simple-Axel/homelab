@@ -79,3 +79,12 @@ services:
       placement:
         constraints:
           - node.hostname != Venus
+  nodered:
+    image: nodered/node-red:3.1.6-18
+    user: dietpi # So it runs with PUID 1000 (pi on the MARS server)
+    environment:
+      TZ: Europe/Madrid
+    ports:
+     - "8108:1880"
+    volumes:
+     - /mnt/samba/AppData/node-red/data:/data
