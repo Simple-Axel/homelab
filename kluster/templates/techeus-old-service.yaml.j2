@@ -5,12 +5,12 @@ metadata:
     kompose.cmd: kompose convert -f main.yml --volumes hostPath
     kompose.version: 1.32.0 (765fde254)
   labels:
-    io.kompose.service: gatus-public
-  name: gatus_public
+    io.kompose.service: techeus-old
+  name: techeus-old
 spec:
   ports:
-    - name: "8101"
-      port: 8101
-      targetPort: 8080
+    - name: "8105"
+      port: 8105
+      targetPort: 80
   selector:
-    io.kompose.service: gatus-public
+    io.kompose.service: techeus-old

@@ -5,15 +5,16 @@ from os import environ, system
 
 def render(file):
     source = "kluster/templates/" + file + ".j2"
-    t = jinja2.Template(source)
+    with open(source, "r") as s:
+        t = jinja2.Template(s.read())
     new_file = "dist/kluster/" + file
     with open(new_file, "w") as f:
-        f.write(t.render(environ.get))
+        f.write(t.render(env=environ.get))
     print(f"{source} => {new_file}")
 
 
 def render_all():
-    l = json.load(open("kluster/template_list.json"))
+    l = list(json.load(open("kluster/template_list.json")))
     for file in l:
         render(file)
 
@@ -25,3 +26,7 @@ def deploy():
 def main():
     render_all()
     deploy()
+
+
+if __name__ == "__main__":
+    main()
