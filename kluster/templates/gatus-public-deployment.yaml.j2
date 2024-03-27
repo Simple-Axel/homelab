@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: gatus-public
+  name: gatus-public
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: gatus-public
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: gatus-public
+    spec:
+      containers:
+        - image: twinproduction/gatus:latest
+          name: gatus-public
+          ports:
+            - containerPort: 8080
+              hostPort: 8101
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: gatus-public-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: {{env("CLUSTER_APPDATA_PATH")}}/GATUS_PUBLIC
+          name: gatus-public-hostpath0

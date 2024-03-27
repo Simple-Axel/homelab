@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      io.kompose.service: app
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: app
+    spec:
+      containers:
+        - env:
+            - name: ET_BASEURL
+              value: '{{env("ET_BASEURL")}}'
+            - name: ET_PASSWORD
+              value: '{{env("ET_PASSWORD")}}'
+            - name: ET_USER
+              value: '{{env("ET_USER")}}'
+          image: ghcr.io/simple-axel/app:main
+          name: app
+          ports:
+            - containerPort: 17170
+              hostPort: 8106
+              protocol: TCP
+      restartPolicy: Always

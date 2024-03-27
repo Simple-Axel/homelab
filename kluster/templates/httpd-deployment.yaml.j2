@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: httpd
+  name: httpd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: httpd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: httpd
+    spec:
+      containers:
+        - image: httpd:2.4
+          name: httpd
+          ports:
+            - containerPort: 80
+              hostPort: 8104
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /usr/local/apache2/htdocs
+              name: httpd-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: {{env("CLUSTER_APPDATA_PATH")}}/DavTech
+          name: httpd-hostpath0

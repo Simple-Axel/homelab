@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: techeus-old
+  name: techeus_old
+spec:
+  ports:
+    - name: "8105"
+      port: 8105
+      targetPort: 80
+  selector:
+    io.kompose.service: techeus-old

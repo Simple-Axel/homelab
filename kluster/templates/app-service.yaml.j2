@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  ports:
+    - name: "8106"
+      port: 8106
+      targetPort: 17170
+  selector:
+    io.kompose.service: app

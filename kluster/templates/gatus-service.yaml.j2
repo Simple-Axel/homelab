@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: gatus
+  name: gatus
+spec:
+  ports:
+    - name: "8100"
+      port: 8100
+      targetPort: 8080
+  selector:
+    io.kompose.service: gatus

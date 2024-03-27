@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: recetas
+  name: recetas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: recetas
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: recetas
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: Europe/Madrid
+          image: lscr.io/linuxserver/grav:latest
+          name: recetas
+          ports:
+            - containerPort: 80
+              hostPort: 8103
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: recetas-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: {{env("CLUSTER_APPDATA_PATH")}}/LCARS/Recetas2
+          name: recetas-hostpath0

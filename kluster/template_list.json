@@ -1,0 +1,20 @@
+[
+    "app-deployment.yaml",
+    "app-service.yaml",
+    "dizquetv-deployment.yaml",
+    "dizquetv-service.yaml",
+    "gatus-deployment.yaml",
+    "gatus-public-deployment.yaml",
+    "gatus-service.yaml",
+    "gatus_public-service.yaml",
+    "go2rtc-deployment.yaml",
+    "go2rtc-service.yaml",
+    "httpd-deployment.yaml",
+    "httpd-service.yaml",
+    "nodered-deployment.yaml",
+    "nodered-service.yaml",
+    "recetas-deployment.yaml",
+    "recetas-service.yaml",
+    "techeus-old-deployment.yaml",
+    "techeus_old-service.yaml"
+]

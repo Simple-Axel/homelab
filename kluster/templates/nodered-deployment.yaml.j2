@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: nodered
+  name: nodered
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nodered
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: nodered
+    spec:
+      containers:
+        - env:
+            - name: TZ
+              value: Europe/Madrid
+          image: nodered/node-red:3.1.6-18
+          name: nodered
+          ports:
+            - containerPort: 1880
+              hostPort: 8108
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: nodered-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: {{env("CLUSTER_APPDATA_PATH")}}/node-red/data
+          name: nodered-hostpath0

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f main.yml --volumes hostPath
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: dizquetv
+  name: dizquetv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: dizquetv
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f main.yml --volumes hostPath
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/cluster-default: "true"
+        io.kompose.service: dizquetv
+    spec:
+      containers:
+        - image: jasongdove/dizquetv:develop-arm64
+          name: dizquetv
+          ports:
+            - containerPort: 8000
+              hostPort: 8107
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /home/node/app/.dizquetv
+              name: dizquetv-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: {{env("CLUSTER_APPDATA_PATH")}}/dizquetv-volume
+          name: dizquetv-hostpath0
