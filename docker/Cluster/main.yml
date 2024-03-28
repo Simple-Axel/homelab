@@ -78,7 +78,7 @@ services:
 
   nodered:
     image: nodered/node-red:3.1.6-18
-    user: 1000 # So it runs with PUID 1000 (pi on the MARS server)
+    user: root
     environment:
       TZ: Europe/Madrid
     ports:
