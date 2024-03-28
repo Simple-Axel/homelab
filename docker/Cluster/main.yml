@@ -62,7 +62,7 @@ services:
   app:
     restart: always
     image: ghcr.io/simple-axel/app:main
-    env_file: stack.env
+    env_file: ../../stack.env # Fix for portainer
     ports:
       - "8106:17170"
     deploy:
