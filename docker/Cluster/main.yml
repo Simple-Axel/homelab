@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   gatus:
     image: twinproduction/gatus:latest
@@ -7,6 +7,7 @@ services:
       - "8100:8080"
     volumes:
       - /mnt/samba/AppData/GATUS:/config
+
   gatus_public:
     image: twinproduction/gatus:latest
     restart: always
@@ -23,39 +24,38 @@ services:
     environment:
       - TZ=Europe/Madrid
     volumes:
-      - "/mnt/go2rtc:/config"
+      - "/mnt/samba/AppData/go2rtc:/config"
     ports:
-     - 8102:1984
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == Venus
+      - 8102:1984
+
   recetas:
     image: lscr.io/linuxserver/grav:latest
     environment:
-      PGID: '1000'
-      PUID: '1000'
+      PGID: "1000"
+      PUID: "1000"
       TZ: Europe/Madrid
     volumes:
-     - /mnt/samba/AppData/LCARS/Recetas2:/config
+      - /mnt/samba/AppData/LCARS/Recetas2:/config
     ports:
       - "8103:80"
+
   httpd:
     image: httpd:2.4
     volumes:
-     - /mnt/samba/AppData/DavTech:/usr/local/apache2/htdocs/
+      - /mnt/samba/AppData/DavTech:/usr/local/apache2/htdocs/
     deploy:
       replicas: 3
     ports:
       - "8104:80"
+
   techeus_old:
     image: lscr.io/linuxserver/grav:latest
     environment:
-      PGID: '1000'
-      PUID: '1000'
+      PGID: "1000"
+      PUID: "1000"
       TZ: Europe/Madrid
     volumes:
-     - /mnt/samba/ClusterAppData/grav01:/config
+      - /mnt/samba/AppData/grav01:/config
     ports:
       - "8105:80"
 
@@ -75,16 +75,13 @@ services:
       - "8107:8000"
     volumes:
       - /mnt/samba/AppData/dizquetv-volume:/home/node/app/.dizquetv
-    deploy:
-      placement:
-        constraints:
-          - node.hostname != Venus
+
   nodered:
     image: nodered/node-red:3.1.6-18
-    user: dietpi # So it runs with PUID 1000 (pi on the MARS server)
+    user: 1000 # So it runs with PUID 1000 (pi on the MARS server)
     environment:
       TZ: Europe/Madrid
     ports:
-     - "8108:1880"
+      - "8108:1880"
     volumes:
-     - /mnt/samba/AppData/node-red/data:/data
+      - /mnt/samba/AppData/node-red/data:/data
